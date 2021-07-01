@@ -19,7 +19,7 @@ def get_ssoffices():
     # Filter python objects with list comprehensions
 
     for key,val in args.items():
-        if key in ('type', 'state'):
+        if key in ('type', 'state', 'city', 'region'):
             param = key
             val = args.get(param)
             output_list = [d for d in output_list if d[param] == val]
