@@ -5,7 +5,7 @@ from db_utils import get_table
 
 app = Flask(__name__)
 
-ssoffices_json = get_table('sso.db','ssoffices_ssoffice')
+ssoffices_list = get_table('sso.db','ssoffices_ssoffice')
 
 
 @app.route('/api')
@@ -14,7 +14,18 @@ def hello_world():
 
 @app.route('/api/ssa/offices')
 def get_ssoffices():
-    return ssoffices_json
+    output_list = ssoffices_list
+    args = request.args
+    # Filter python objects with list comprehensions
+
+    for key,val in args.items():
+        if key in ('type', 'state'):
+            param = key
+            val = args.get(param)
+            output_list = [d for d in output_list if d[param] == val]
+
+    output_json = json.dumps(output_list)
+    return output_json
 
 @app.route('/api/ssa/staff')
 def get_ssstaff():
