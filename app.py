@@ -12,7 +12,11 @@ ssoffices_list = get_table('sso.db','ssoffices_ssoffice')
 def hello_world():
     return 'API Home!'
 
-@app.route('/api/ssa/offices')
+@app.route('/api/ssa')
+def ssa_home():
+    return "SSA HOME"
+
+@app.route('/api/ssa/office')
 def get_ssoffices():
     output_list = ssoffices_list
     args = request.args
